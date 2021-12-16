@@ -111,18 +111,13 @@ module "mwaa_security_group" {
   source  = "cloudposse/security-group/aws"
   version = "0.4.2"
 
-  enabled                       = local.security_group_enabled
-  security_group_name           = var.security_group_name
-  create_before_destroy         = var.security_group_create_before_destroy
-  security_group_create_timeout = var.security_group_create_timeout
-  security_group_delete_timeout = var.security_group_delete_timeout
-  security_group_description    = var.security_group_description
-  allow_all_egress              = true
-  rules                         = var.additional_security_group_rules
+  enabled                    = local.security_group_enabled
+  security_group_description = var.security_group_description
+  allow_all_egress           = true
+  rules                      = var.additional_security_group_rules
   rule_matrix = [
     {
       source_security_group_ids = local.allowed_security_group_ids
-      cidr_blocks               = var.allowed_cidr_blocks
       rules = [
         {
           key         = "mwaa"
@@ -201,6 +196,7 @@ resource "aws_mwaa_environment" "default" {
   max_workers                     = var.max_workers
   min_workers                     = var.min_workers
   plugins_s3_object_version       = var.plugins_s3_object_version
+  plugins_s3_path                 = var.plugins_s3_path
   requirements_s3_object_version  = var.requirements_s3_object_version
   requirements_s3_path            = var.requirements_s3_path
   webserver_access_mode           = var.webserver_access_mode
