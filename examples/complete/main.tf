@@ -28,13 +28,8 @@ module "subnets" {
 module "mwaa" {
   source = "../.."
 
-  name                  = module.this.id
-  webserver_access_mode = var.webserver_access_mode
-
-  network_configuration {
-    security_group_ids = [module.vpc.vpc_default_security_group_id]
-    subnet_ids         = module.subnets.private_subnet_ids
-  }
-
+  name        = module.this.id
+  subnet_ids  = module.subnets.private_subnet_ids
+  
   context = module.this.context
 }
