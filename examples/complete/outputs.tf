@@ -1,14 +1,9 @@
-output "id" {
-  description = "ID of the created example"
-  value       = module.example.id
+output "mwaa_environment_arn" {
+  description = "The ARN of the MWAA Environment"
+  value       = module.mwaa.mwaa_environment_arn
 }
 
-output "example" {
-  description = "Output \"example\" from example module"
-  value       = module.example.example
-}
-
-output "random" {
-  description = "Output \"random\" from example module"
-  value       = module.example.random
+output "mwaa_environment_logging_configuration" {
+  description = "The Created At date of the MWAA Environment"
+  value       = module.mwaa.logging_configuration
 }

@@ -63,7 +63,7 @@ data "aws_iam_policy_document" "iam_policy_document" {
       "logs:DescribeLogGroups"
     ]
     effect    = "Allow"
-    resources = ["arn:aws:logs:${local.region}:${local.account_id}:log-group:airflow-${var.prefix}*"]
+    resources = ["arn:aws:logs:${local.region}:${local.account_id}:log-group:airflow-${module.this.id}*"]
   }
 
   statement {
