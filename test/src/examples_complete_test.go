@@ -1,13 +1,18 @@
 package test
 
 import (
+	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
+	"strings"
 	"testing"
 )
 
 // Test the Terraform module in examples/complete using Terratest.
 func TestExamplesComplete(t *testing.T) {
+	randID := strings.ToLower(random.UniqueId())
+    attributes := []string{randID}
+
 	t.Parallel()
 
 	terraformOptions := &terraform.Options{
@@ -16,6 +21,11 @@ func TestExamplesComplete(t *testing.T) {
 		Upgrade:      true,
 		// Variables to pass to our Terraform code using -var-file options
 		VarFiles: []string{"fixtures.us-east-2.tfvars"},
+		// We always include a random attribute so that parallel tests
+		// and AWS resources do not interfere with each other
+		Vars: map[string]interface{}{
+			"attributes": attributes,
+		},
 	}
 
 	// At the end of the test, run `terraform destroy` to clean up any resources that were created
