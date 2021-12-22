@@ -145,20 +145,6 @@ module "mwaa_s3_bucket" {
 
   context = module.this.context
 }
-
-# module "mwaa_iam_policy" {
-#   source  = "cloudposse/iam-policy/aws"
-#   version = "0.2.3"
-
-#   enabled = local.iam_role_enabled
-
-#   iam_source_json       = var.iam_source_json
-#   iam_source_json_url   = var.iam_source_json_url
-#   iam_policy_statements = var.iam_policy_statements
-
-#   context = module.this.context
-# }
-
 module "mwaa_iam_role" {
   source  = "cloudposse/iam-role/aws"
   version = "0.14.0"
