@@ -171,7 +171,7 @@ module "mwaa_s3_bucket" {
   version = "0.44.1"
 
   enabled = local.s3_bucket_enabled
-  name    = module.this.id
+  name    = module.s3_label.id
 
   context = module.s3_label.context
 }
