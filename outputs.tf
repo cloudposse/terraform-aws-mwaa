@@ -23,10 +23,10 @@ output "mwaa_environment_created_at" {
   value       = join("", aws_mwaa_environment.default.*.created_at)
 }
 
-# output "mwaa_environment_logging_configuration" {
-#   description = "The Created At date of the MWAA Environment"
-#   value       = join("", aws_mwaa_environment.default.*.logging_configuration)
-# }
+output "mwaa_environment_logging_configuration" {
+  description = "The Created At date of the MWAA Environment"
+  value       = join("", try(aws_mwaa_environment.default.logging_configuration[0], null))
+}
 
 output "mwaa_environment_service_role_arn" {
   description = "The Created At date of the MWAA Environment"

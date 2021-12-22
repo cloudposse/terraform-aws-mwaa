@@ -29,7 +29,7 @@ module "mwaa" {
   source = "../.."
 
   name       = module.this.id
-  vpc_id     = nodule.vpc.vpc_id
+  vpc_id     = module.vpc.vpc_id
   subnet_ids = module.subnets.private_subnet_ids
 
   context = module.this.context

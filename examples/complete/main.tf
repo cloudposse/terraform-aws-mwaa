@@ -30,7 +30,7 @@ module "mwaa" {
 
   enabled                       = module.this.enabled
   name                          = module.this.id
-  vpc_id                        = nodule.vpc.vpc_id
+  vpc_id                        = module.vpc.vpc_id
   subnet_ids                    = module.subnets.private_subnet_ids
   airflow_version               = var.airflow_version
   dag_s3_path                   = var.dag_s3_path
