@@ -9,41 +9,41 @@ output "s3_bucket_arn" {
 }
 
 output "execution_role_arn" {
-  description = "IAM Role ARN for MWAA Execution Role"
+  description = "IAM Role ARN for Amazon MWAA Execution Role"
   value       = var.create_iam_role ? module.mwaa_iam_role.arn : var.execution_role_arn
 }
 
-output "mwaa_environment_arn" {
-  description = "The ARN of the MWAA Environment"
+output "arn" {
+  description = "The ARN of the Amazon MWAA Environment"
   value       = join("", aws_mwaa_environment.default.*.arn)
 }
 
-output "mwaa_environment_created_at" {
-  description = "The Created At date of the MWAA Environment"
+output "created_at" {
+  description = "The Created At date of the Amazon MWAA Environment"
   value       = join("", aws_mwaa_environment.default.*.created_at)
 }
 
-output "mwaa_environment_logging_configuration" {
-  description = "The Created At date of the MWAA Environment"
-  value       = join("", try(aws_mwaa_environment.default.*.logging_configuration[0], null))
+output "logging_configuration" {
+  description = "The Logging Configuration of the Amazon MWAA Environment"
+  value       = try(aws_mwaa_environment.default[0].logging_configuration, [])
 }
 
-output "mwaa_environment_service_role_arn" {
-  description = "The Created At date of the MWAA Environment"
+output "service_role_arn" {
+  description = "The Service Role ARN of the Amazon MWAA Environment"
   value       = join("", aws_mwaa_environment.default.*.service_role_arn)
 }
 
-output "mwaa_environment_status" {
-  description = "The Created At date of the MWAA Environment"
+output "status" {
+  description = "The status of the Amazon MWAA Environment"
   value       = join("", aws_mwaa_environment.default.*.status)
 }
 
-# output "mwaa_environment_tags_all" {
-#   description = "The Created At date of the MWAA Environment"
-#   value       = join("", aws_mwaa_environment.default.*.tags_all)
-# }
+output "tags_all" {
+  description = "A map of tags assigned to the resource, including those inherited from the provider for the Amazon MWAA Environment"
+  value       = try(aws_mwaa_environment.default[0].tags_all, [])
+}
 
-output "mwaa_environment_webserver_url" {
-  description = "The Created At date of the MWAA Environment"
+output "webserver_url" {
+  description = "The webserver URL of the Amazon MWAA Environment"
   value       = join("", aws_mwaa_environment.default.*.webserver_url)
 }
