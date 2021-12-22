@@ -16,7 +16,7 @@ data "aws_iam_policy_document" "iam_policy_document" {
     sid       = ""
     actions   = ["airflow:PublishMetrics"]
     effect    = "Allow"
-    resources = ["arn:aws:airflow:${local.region}:${local.account_id}:environment/${var.prefix}"]
+    resources = ["arn:aws:airflow:${local.region}:${local.account_id}:environment/${module.this.id}"]
   }
 
   statement {
@@ -24,8 +24,8 @@ data "aws_iam_policy_document" "iam_policy_document" {
     actions = ["s3:ListAllMyBuckets"]
     effect  = "Allow"
     resources = [
-      var.create_s3_bucket ? module.mwaa_s3_bucket.arn : var.source_bucket_arn,
-      "${var.create_s3_bucket ? module.mwaa_s3_bucket.arn : var.source_bucket_arn}/*"
+      var.create_s3_bucket ? module.mwaa_s3_bucket.bucket_arn : var.source_bucket_arn,
+      "${var.create_s3_bucket ? module.mwaa_s3_bucket.bucket_arn : var.source_bucket_arn}/*"
     ]
   }
 
@@ -38,8 +38,8 @@ data "aws_iam_policy_document" "iam_policy_document" {
     ]
     effect = "Allow"
     resources = [
-      var.create_s3_bucket ? module.mwaa_s3_bucket.arn : var.source_bucket_arn,
-      "${var.create_s3_bucket ? module.mwaa_s3_bucket.arn : var.source_bucket_arn}/*"
+      var.create_s3_bucket ? module.mwaa_s3_bucket.bucket_arn : var.source_bucket_arn,
+      "${var.create_s3_bucket ? module.mwaa_s3_bucket.bucket_arn : var.source_bucket_arn}/*"
     ]
   }
 
@@ -117,7 +117,7 @@ module "mwaa_security_group" {
   rules                      = var.additional_security_group_rules
   rule_matrix = [
     {
-      source_security_group_ids = local.allowed_security_group_ids
+      source_security_group_ids = var.associated_security_group_ids
       rules = [
         {
           key         = "mwaa"
@@ -174,7 +174,7 @@ module "mwaa_iam_role" {
   use_fullname = true
 
   policy_documents = [
-    data.aws_iam_policy_document.iam_policy_document[0].json,
+    data.aws_iam_policy_document.iam_policy_document.json,
   ]
 
   policy_document_count = 1
@@ -201,7 +201,7 @@ resource "aws_mwaa_environment" "default" {
   requirements_s3_path            = var.requirements_s3_path
   webserver_access_mode           = var.webserver_access_mode
   weekly_maintenance_window_start = var.weekly_maintenance_window_start
-  source_bucket_arn               = var.create_s3_bucket ? module.mwaa_s3_bucket.arn : var.source_bucket_arn
+  source_bucket_arn               = var.create_s3_bucket ? module.mwaa_s3_bucket.bucket_arn : var.source_bucket_arn
   execution_role_arn              = var.create_iam_role ? module.mwaa_iam_role.arn : var.execution_role_arn
 
   logging_configuration {

@@ -5,7 +5,7 @@ output "security_group_ids" {
 
 output "s3_bucket_arn" {
   description = "ARN of the S3 bucket"
-  value       = var.create_s3_bucket ? module.mwaa_s3_bucket.arn : var.source_bucket_arn
+  value       = var.create_s3_bucket ? module.mwaa_s3_bucket.bucket_arn : var.source_bucket_arn
 }
 
 output "execution_role_arn" {
@@ -23,10 +23,10 @@ output "mwaa_environment_created_at" {
   value       = join("", aws_mwaa_environment.default.*.created_at)
 }
 
-output "mwaa_environment_logging_configuration" {
-  description = "The Created At date of the MWAA Environment"
-  value       = join("", aws_mwaa_environment.default.*.logging_configuration)
-}
+# output "mwaa_environment_logging_configuration" {
+#   description = "The Created At date of the MWAA Environment"
+#   value       = join("", aws_mwaa_environment.default.*.logging_configuration)
+# }
 
 output "mwaa_environment_service_role_arn" {
   description = "The Created At date of the MWAA Environment"
@@ -38,10 +38,10 @@ output "mwaa_environment_status" {
   value       = join("", aws_mwaa_environment.default.*.status)
 }
 
-output "mwaa_environment_tags_all" {
-  description = "The Created At date of the MWAA Environment"
-  value       = join("", aws_mwaa_environment.default.*.tags_all)
-}
+# output "mwaa_environment_tags_all" {
+#   description = "The Created At date of the MWAA Environment"
+#   value       = join("", aws_mwaa_environment.default.*.tags_all)
+# }
 
 output "mwaa_environment_webserver_url" {
   description = "The Created At date of the MWAA Environment"
