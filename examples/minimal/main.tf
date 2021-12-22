@@ -28,8 +28,8 @@ module "subnets" {
 module "mwaa" {
   source = "../.."
 
-  name        = module.this.id
-  subnet_ids  = module.subnets.private_subnet_ids
-  
+  name       = module.this.id
+  subnet_ids = module.subnets.private_subnet_ids
+
   context = module.this.context
 }
