@@ -25,7 +25,7 @@ output "mwaa_environment_created_at" {
 
 output "mwaa_environment_logging_configuration" {
   description = "The Created At date of the MWAA Environment"
-  value       = join("", try(aws_mwaa_environment.default.logging_configuration[0], null))
+  value       = join("", try(aws_mwaa_environment.default.*.logging_configuration[0], null))
 }
 
 output "mwaa_environment_service_role_arn" {
