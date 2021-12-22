@@ -90,13 +90,14 @@
 
 | Name | Description |
 |------|-------------|
-| <a name="output_execution_role_arn"></a> [execution\_role\_arn](#output\_execution\_role\_arn) | IAM Role ARN for MWAA Execution Role |
-| <a name="output_mwaa_environment_arn"></a> [mwaa\_environment\_arn](#output\_mwaa\_environment\_arn) | The ARN of the MWAA Environment |
-| <a name="output_mwaa_environment_created_at"></a> [mwaa\_environment\_created\_at](#output\_mwaa\_environment\_created\_at) | The Created At date of the MWAA Environment |
-| <a name="output_mwaa_environment_logging_configuration"></a> [mwaa\_environment\_logging\_configuration](#output\_mwaa\_environment\_logging\_configuration) | The Created At date of the MWAA Environment |
-| <a name="output_mwaa_environment_service_role_arn"></a> [mwaa\_environment\_service\_role\_arn](#output\_mwaa\_environment\_service\_role\_arn) | The Created At date of the MWAA Environment |
-| <a name="output_mwaa_environment_status"></a> [mwaa\_environment\_status](#output\_mwaa\_environment\_status) | The Created At date of the MWAA Environment |
-| <a name="output_mwaa_environment_webserver_url"></a> [mwaa\_environment\_webserver\_url](#output\_mwaa\_environment\_webserver\_url) | The Created At date of the MWAA Environment |
+| <a name="output_arn"></a> [arn](#output\_arn) | The ARN of the Amazon MWAA Environment |
+| <a name="output_created_at"></a> [created\_at](#output\_created\_at) | The Created At date of the Amazon MWAA Environment |
+| <a name="output_execution_role_arn"></a> [execution\_role\_arn](#output\_execution\_role\_arn) | IAM Role ARN for Amazon MWAA Execution Role |
+| <a name="output_logging_configuration"></a> [logging\_configuration](#output\_logging\_configuration) | The Logging Configuration of the Amazon MWAA Environment |
 | <a name="output_s3_bucket_arn"></a> [s3\_bucket\_arn](#output\_s3\_bucket\_arn) | ARN of the S3 bucket |
 | <a name="output_security_group_ids"></a> [security\_group\_ids](#output\_security\_group\_ids) | IDs of the MWAA Security Group(s) |
+| <a name="output_service_role_arn"></a> [service\_role\_arn](#output\_service\_role\_arn) | The Service Role ARN of the Amazon MWAA Environment |
+| <a name="output_status"></a> [status](#output\_status) | The status of the Amazon MWAA Environment |
+| <a name="output_tags_all"></a> [tags\_all](#output\_tags\_all) | A map of tags assigned to the resource, including those inherited from the provider for the Amazon MWAA Environment |
+| <a name="output_webserver_url"></a> [webserver\_url](#output\_webserver\_url) | The webserver URL of the Amazon MWAA Environment |
 <!-- markdownlint-restore -->
