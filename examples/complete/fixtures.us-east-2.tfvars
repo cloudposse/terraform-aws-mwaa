@@ -45,5 +45,5 @@ worker_logs_enabled = true
 worker_logs_level = "INFO"
 
 airflow_configuration_options = {
-    "auth_backend" = "airflow.api.auth.backend.deny_all"
+  "auth_backend" = "airflow.api.auth.backend.deny_all"
 }
