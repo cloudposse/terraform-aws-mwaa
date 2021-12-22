@@ -35,7 +35,7 @@ func TestExamplesComplete(t *testing.T) {
 	terraform.InitAndApply(t, terraformOptions)
 
 	// Run `terraform output` to get the value of an output variable
-	mwaaEnvironmentARN := terraform.Output(t, terraformOptions, "mwaa_environment_arn")
+	mwaaEnvironmentARN := terraform.Output(t, terraformOptions, "arn")
 
 	// Verify we're getting back the outputs we expect
 	assert.Regexp(t, "^eg-ue2-test-mwaa-test-[0-9a-fA-F]+$", mwaaEnvironmentARN)

@@ -11,6 +11,36 @@ locals {
   region                 = data.aws_region.current.name
 }
 
+module "s3_label" {
+  source  = "cloudposse/label/null"
+  version = "0.25.0"
+  enabled = local.s3_bucket_enabled
+
+  attributes = ["s3"]
+
+  context = module.this.context
+}
+
+module "sg_label" {
+  source  = "cloudposse/label/null"
+  version = "0.25.0"
+  enabled = local.security_group_enabled
+
+  attributes = ["sg"]
+
+  context = module.this.context
+}
+
+module "iam_label" {
+  source  = "cloudposse/label/null"
+  version = "0.25.0"
+  enabled = local.iam_role_enabled
+
+  attributes = ["iam"]
+
+  context = module.this.context
+}
+
 data "aws_iam_policy_document" "iam_policy_document" {
   statement {
     sid       = ""
@@ -133,7 +163,7 @@ module "mwaa_security_group" {
   ]
   vpc_id = var.vpc_id
 
-  context = module.this.context
+  context = module.sg_label.context
 }
 
 module "mwaa_s3_bucket" {
@@ -143,7 +173,7 @@ module "mwaa_s3_bucket" {
   enabled = local.s3_bucket_enabled
   name    = module.this.id
 
-  context = module.this.context
+  context = module.s3_label.context
 }
 module "mwaa_iam_role" {
   source  = "cloudposse/iam-role/aws"
@@ -167,7 +197,7 @@ module "mwaa_iam_role" {
   policy_description    = "AWS MWAA IAM policy"
   role_description      = "AWS MWAA IAM role"
 
-  context = module.this.context
+  context = module.iam_label.context
 }
 
 resource "aws_mwaa_environment" "default" {
