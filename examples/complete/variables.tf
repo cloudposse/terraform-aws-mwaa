@@ -92,3 +92,15 @@ variable "worker_logs_level" {
   description = "Workers logging level. Valid values: CRITICAL, ERROR, WARNING, INFO, DEBUG"
   default     = "INFO"
 }
+
+variable "max_workers" {
+  type        = number
+  description = "The maximum number of workers that can be automatically scaled up. Value need to be between 1 and 25."
+  default     = 10
+}
+
+variable "min_workers" {
+  type        = number
+  description = "The minimum number of workers that you want to run in your environment."
+  default     = 1
+}
