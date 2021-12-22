@@ -36,16 +36,6 @@ variable "environment_class" {
 variable "dag_processing_logs_enabled" {
   type        = bool
   description = "Enabling or disabling the collection of logs for processing DAGs"
-}
-
-variable "dag_processing_logs_level" {
-  type        = string
-  description = "DAG processing logging level. Valid values: CRITICAL, ERROR, WARNING, INFO, DEBUG"
-}
-
-variable "dag_processing_logs_enabled" {
-  type        = bool
-  description = "Enabling or disabling the collection of logs for processing DAGs"
   default     = false
 }
 
