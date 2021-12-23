@@ -38,5 +38,5 @@ func TestExamplesComplete(t *testing.T) {
 	mwaaEnvironmentARN := terraform.Output(t, terraformOptions, "arn")
 
 	// Verify we're getting back the outputs we expect
-	assert.Contains(t, "eg-ue2-test-mwaa-test-"+randID, mwaaEnvironmentARN)
+	assert.Contains(t, mwaaEnvironmentARN, "eg-ue2-test-mwaa-test-"+randID)
 }
