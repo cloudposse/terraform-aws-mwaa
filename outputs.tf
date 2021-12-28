@@ -1,16 +1,16 @@
 output "security_group_ids" {
   description = "IDs of the MWAA Security Group(s)"
-  value       = var.create_security_group ? concat(var.associated_security_group_ids, [module.mwaa_security_group.id]) : var.associated_security_group_ids
+  value       = local.security_group_ids
 }
 
 output "s3_bucket_arn" {
   description = "ARN of the S3 bucket"
-  value       = var.create_s3_bucket ? module.mwaa_s3_bucket.bucket_arn : var.source_bucket_arn
+  value       = local.s3_bucket_arn
 }
 
 output "execution_role_arn" {
   description = "IAM Role ARN for Amazon MWAA Execution Role"
-  value       = var.create_iam_role ? module.mwaa_iam_role.arn : var.execution_role_arn
+  value       = local.execution_role_arn
 }
 
 output "arn" {

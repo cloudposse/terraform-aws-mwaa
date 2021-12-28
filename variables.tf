@@ -1,6 +1,11 @@
+variable "region" {
+  type        = string
+  description = "AWS region"
+}
+
 variable "vpc_id" {
   type        = string
-  description = "VPC ID for the EKS cluster. Required if `create_security_group` is `true`"
+  description = "VPC ID for the MWAA environment. Required if `create_security_group` is `true`"
 }
 
 variable "create_security_group" {
@@ -62,7 +67,7 @@ variable "execution_role_arn" {
 }
 
 variable "airflow_configuration_options" {
-  description = "The airflow_configuration_options parameter specifies airflow override options."
+  description = "The Airflow override options"
   type        = any
   default     = null
 }
