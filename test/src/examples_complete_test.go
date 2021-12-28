@@ -11,7 +11,7 @@ import (
 // Test the Terraform module in examples/complete using Terratest.
 func TestExamplesComplete(t *testing.T) {
 	randID := strings.ToLower(random.UniqueId())
-    attributes := []string{randID}
+	attributes := []string{randID}
 
 	t.Parallel()
 
