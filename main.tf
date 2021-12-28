@@ -102,7 +102,7 @@ data "aws_iam_policy_document" "this" {
   statement {
     actions   = "cloudwatch:PutMetricData"
     effect    = "Allow"
-    resources = "*"
+    resources = ["*"]
   }
 
   statement {
@@ -115,7 +115,7 @@ data "aws_iam_policy_document" "this" {
       "sqs:SendMessage"
     ]
     effect    = "Allow"
-    resources = "arn:${local.partition}:sqs:${var.region}:*:airflow-celery-*"
+    resources = ["arn:${local.partition}:sqs:${var.region}:*:airflow-celery-*"]
   }
 
   statement {
@@ -126,7 +126,7 @@ data "aws_iam_policy_document" "this" {
       "kms:Encrypt"
     ]
     effect    = "Allow"
-    resources = "arn:${local.partition}:kms:*:${local.account_id}:key/*"
+    resources = ["arn:${local.partition}:kms:*:${local.account_id}:key/*"]
     condition {
       test     = "StringLike"
       variable = "kms:ViaService"
@@ -219,7 +219,7 @@ resource "aws_mwaa_environment" "default" {
   webserver_access_mode           = var.webserver_access_mode
   weekly_maintenance_window_start = var.weekly_maintenance_window_start
   source_bucket_arn               = local.s3_bucket_arn
-  execution_role_arn              = var.create_iam_role ? module.mwaa_iam_role.arn : var.execution_role_arn
+  execution_role_arn              = local.execution_role_arn
 
   logging_configuration {
     dag_processing_logs {
