@@ -46,13 +46,13 @@ module "iam_label" {
 
 data "aws_iam_policy_document" "this" {
   statement {
-    actions   = "airflow:PublishMetrics"
+    actions   = ["airflow:PublishMetrics"]
     effect    = "Allow"
-    resources = "arn:${local.partition}:airflow:${var.region}:${local.account_id}:environment/${module.this.id}"
+    resources = ["arn:${local.partition}:airflow:${var.region}:${local.account_id}:environment/${module.this.id}"]
   }
 
   statement {
-    actions = "s3:ListAllMyBuckets"
+    actions = ["s3:ListAllMyBuckets"]
     effect  = "Deny"
     resources = [
       local.s3_bucket_arn,
@@ -100,7 +100,7 @@ data "aws_iam_policy_document" "this" {
   }
 
   statement {
-    actions   = "cloudwatch:PutMetricData"
+    actions   = ["cloudwatch:PutMetricData"]
     effect    = "Allow"
     resources = ["*"]
   }

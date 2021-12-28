@@ -29,6 +29,7 @@ module "mwaa" {
   source = "../.."
 
   enabled                       = module.this.enabled
+  region                        = var.region
   vpc_id                        = module.vpc.vpc_id
   subnet_ids                    = module.subnets.private_subnet_ids
   airflow_version               = var.airflow_version
