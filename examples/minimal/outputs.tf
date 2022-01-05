@@ -5,7 +5,7 @@ output "s3_bucket_arn" {
 
 output "arn" {
   value       = module.mwaa.arn
-  description = "ARN of MWAA environment."
+  description = "ARN of MWAA environment"
 }
 
 output "logging_configuration" {
@@ -13,12 +13,10 @@ output "logging_configuration" {
   description = "The Logging Configuration of the MWAA Environment"
 }
 
-
 output "security_group_ids" {
   description = "IDs of the MWAA Security Group(s)"
   value       = module.mwaa.security_group_ids
 }
-
 
 output "execution_role_arn" {
   description = "IAM Role ARN for Amazon MWAA Execution Role"
@@ -29,7 +27,6 @@ output "created_at" {
   description = "The Created At date of the Amazon MWAA Environment"
   value       = module.mwaa.created_at
 }
-
 
 output "service_role_arn" {
   description = "The Service Role ARN of the Amazon MWAA Environment"

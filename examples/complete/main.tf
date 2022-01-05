@@ -1,7 +1,3 @@
-provider "aws" {
-  region = var.region
-}
-
 module "vpc" {
   source  = "cloudposse/vpc/aws"
   version = "0.28.1"
@@ -28,7 +24,6 @@ module "subnets" {
 module "mwaa" {
   source = "../.."
 
-  enabled                       = module.this.enabled
   region                        = var.region
   vpc_id                        = module.vpc.vpc_id
   subnet_ids                    = module.subnets.private_subnet_ids
