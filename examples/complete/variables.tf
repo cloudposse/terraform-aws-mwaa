@@ -95,7 +95,7 @@ variable "worker_logs_level" {
 
 variable "max_workers" {
   type        = number
-  description = "The maximum number of workers that can be automatically scaled up. Value need to be between 1 and 25."
+  description = "The maximum number of workers that can be automatically scaled up. Value needs to be between 1 and 25"
   default     = 10
 }
 
