@@ -1,6 +1,6 @@
 output "s3_bucket_arn" {
   value       = module.mwaa.s3_bucket_arn
-  description = "ARN of S3 bucket"
+  description = "ARN of S3 bucket."
 }
 
 output "arn" {
