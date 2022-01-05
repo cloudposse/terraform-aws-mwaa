@@ -1,6 +1,6 @@
 variable "availability_zones" {
   type        = list(string)
-  description = "List of availability zones for VPC creation"
+  description = "List of availability zones for VPC subnets"
 }
 
 variable "region" {
@@ -14,7 +14,7 @@ variable "webserver_access_mode" {
 }
 
 variable "airflow_configuration_options" {
-  description = "The airflow_configuration_options parameter specifies airflow override options."
+  description = "Airflow override options"
   type        = any
 }
 
@@ -95,7 +95,7 @@ variable "worker_logs_level" {
 
 variable "max_workers" {
   type        = number
-  description = "The maximum number of workers that can be automatically scaled up. Value need to be between 1 and 25."
+  description = "The maximum number of workers that can be automatically scaled up. Value needs to be between 1 and 25"
   default     = 10
 }
 
