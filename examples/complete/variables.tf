@@ -14,7 +14,7 @@ variable "webserver_access_mode" {
 }
 
 variable "airflow_configuration_options" {
-  description = "The airflow_configuration_options parameter specifies airflow override options."
+  description = "Airflow override options"
   type        = any
 }
 
