@@ -28,8 +28,7 @@
 
 -->
 
-This is `terraform-aws-mwaa` project provides all the scaffolding for a typical well-built Cloud Posse module. It's a template repository you can
-use when creating new repositories.
+Terraform module to provision Amazon Managed Workflows for Apache Airflow
 
 ---
 
@@ -100,9 +99,24 @@ For automated tests of the complete example using [bats](https://github.com/bats
 (which tests and deploys the example on AWS), see [test](test).
 
 ```hcl
-module "example" {
-  source = "https://github.com/cloudposse/terraform-aws-mwaa.git?ref=master"
-  example = "Hello world!"
+module "mwaa" {
+  source = "cloudposse/mwaa/aws"
+  # Cloud Posse recommends pinning every module to a specific version
+  # version = "x.x.x"
+  vpc_id                      = var.vpc_id
+  subnet_ids                  = var.subnet_ids
+  airflow_version             = "2.0.2"
+  dag_s3_path                 = "dags"
+  environment_class           = "mw1.small"
+  min_workers                 = 1
+  max_workers                 = 10
+  webserver_access_mode       = "PRIVATE_ONLY"
+  dag_processing_logs_enabled = true
+  dag_processing_logs_level   = "INFO"
+  name                        = "app"
+  stage                       = "test"
+  namespace                   = "eg"
+  enabled                     = true
 }
 ```
 
@@ -335,7 +349,7 @@ In general, PRs are welcome. We follow the typical "fork-and-pull" Git workflow.
 
 ## Copyrights
 
-Copyright © 2020-2021 [Cloud Posse, LLC](https://cloudposse.com)
+Copyright © 2022-2022 [Cloud Posse, LLC](https://cloudposse.com)
 
 
 
