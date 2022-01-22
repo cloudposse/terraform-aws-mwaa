@@ -208,3 +208,9 @@ variable "subnet_ids" {
   type        = list(string)
   description = "The private subnet IDs in which the environment should be created. MWAA requires two subnets"
 }
+
+variable "allowed_cidr_blocks" {
+  type        = list(string)
+  default     = []
+  description = "List of CIDR blocks to be allowed to connect to the cluster"
+}

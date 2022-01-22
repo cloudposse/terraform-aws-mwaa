@@ -149,6 +149,7 @@ module "mwaa_security_group" {
   rule_matrix = [
     {
       source_security_group_ids = var.associated_security_group_ids
+      cidr_blocks               = var.allowed_cidr_blocks
       rules = [
         {
           key         = "mwaa"
