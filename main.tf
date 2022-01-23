@@ -9,7 +9,7 @@ locals {
   iam_role_enabled       = local.enabled && var.create_iam_role
   account_id             = data.aws_caller_identity.current.account_id
   partition              = data.aws_partition.current.partition
-  security_group_ids     = var.create_security_group ? concat(var.associated_security_group_ids, [module.mwaa_security_group.id]) : var.associated_security_group_ids
+  security_group_ids     = var.create_security_group ? concat(var.allowed_security_group_ids, [module.mwaa_security_group.id]) : var.allowed_security_group_ids
   s3_bucket_arn          = var.create_s3_bucket ? module.mwaa_s3_bucket.bucket_arn : var.source_bucket_arn
   execution_role_arn     = var.create_iam_role ? module.mwaa_iam_role.arn : var.execution_role_arn
 }
