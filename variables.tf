@@ -38,7 +38,7 @@ variable "source_bucket_arn" {
   default     = null
 }
 
-variable "associated_security_group_ids" {
+variable "allowed_security_group_ids" {
   type        = list(string)
   default     = []
   description = <<-EOT
