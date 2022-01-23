@@ -212,5 +212,5 @@ variable "subnet_ids" {
 variable "allowed_cidr_blocks" {
   type        = list(string)
   default     = []
-  description = "List of CIDR blocks to be allowed to connect to the cluster"
+  description = "List of CIDR blocks to be allowed to connect to the MWAA Environment"
 }
