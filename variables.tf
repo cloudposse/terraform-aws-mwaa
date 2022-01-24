@@ -47,6 +47,15 @@ variable "associated_security_group_ids" {
     EOT
 }
 
+variable "allowed_security_group_ids" {
+  type        = list(string)
+  default     = []
+  description = <<-EOT
+    A list of IDs of Security Groups to allow access to the security group created by this module.
+    The length of this list must be known at "plan" time.
+    EOT
+}
+
 variable "additional_security_group_rules" {
   type        = list(any)
   default     = []
@@ -207,4 +216,10 @@ variable "worker_logs_level" {
 variable "subnet_ids" {
   type        = list(string)
   description = "The private subnet IDs in which the environment should be created. MWAA requires two subnets"
+}
+
+variable "allowed_cidr_blocks" {
+  type        = list(string)
+  default     = []
+  description = "List of CIDR blocks to be allowed to connect to the MWAA Environment"
 }
