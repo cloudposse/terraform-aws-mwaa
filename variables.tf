@@ -1,8 +1,3 @@
-variable "region" {
-  type        = string
-  description = "AWS region"
-}
-
 variable "vpc_id" {
   type        = string
   description = "VPC ID for the MWAA environment. Required if `create_security_group` is `true`"
