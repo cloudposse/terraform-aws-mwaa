@@ -1,5 +1,12 @@
-data "aws_caller_identity" "current" {}
-data "aws_partition" "current" {}
+data "aws_caller_identity" "current" {
+  count = local.enabled ? 1 : 0
+}
+data "aws_partition" "current" {
+  count = local.enabled ? 1 : 0
+}
+data "aws_region" "current" {
+  count = local.enabled ? 1 : 0
+}
 
 locals {
   enabled = module.this.enabled
@@ -7,8 +14,9 @@ locals {
   security_group_enabled = local.enabled && var.create_security_group
   s3_bucket_enabled      = local.enabled && var.create_s3_bucket
   iam_role_enabled       = local.enabled && var.create_iam_role
-  account_id             = data.aws_caller_identity.current.account_id
-  partition              = data.aws_partition.current.partition
+  account_id             = join("", data.aws_caller_identity.current.*.account_id)
+  partition              = join("", data.aws_partition.current.*.partition)
+  region                 = join("", data.aws_region.current.*.name)
   security_group_ids     = var.create_security_group ? concat(var.associated_security_group_ids, [module.mwaa_security_group.id]) : var.associated_security_group_ids
   s3_bucket_arn          = var.create_s3_bucket ? module.mwaa_s3_bucket.bucket_arn : var.source_bucket_arn
   execution_role_arn     = var.create_iam_role ? module.mwaa_iam_role.arn : var.execution_role_arn
@@ -48,7 +56,7 @@ data "aws_iam_policy_document" "this" {
   statement {
     actions   = ["airflow:PublishMetrics"]
     effect    = "Allow"
-    resources = ["arn:${local.partition}:airflow:${var.region}:${local.account_id}:environment/${module.this.id}"]
+    resources = ["arn:${local.partition}:airflow:${local.region}:${local.account_id}:environment/${module.this.id}"]
   }
 
   statement {
@@ -84,7 +92,7 @@ data "aws_iam_policy_document" "this" {
       "logs:GetQueryResults"
     ]
     effect    = "Allow"
-    resources = ["arn:${local.partition}:logs:${var.region}:${local.account_id}:log-group:airflow-${module.this.id}-*"]
+    resources = ["arn:${local.partition}:logs:${local.region}:${local.account_id}:log-group:airflow-${module.this.id}-*"]
   }
 
   statement {
@@ -115,7 +123,7 @@ data "aws_iam_policy_document" "this" {
       "sqs:SendMessage"
     ]
     effect    = "Allow"
-    resources = ["arn:${local.partition}:sqs:${var.region}:*:airflow-celery-*"]
+    resources = ["arn:${local.partition}:sqs:${local.region}:*:airflow-celery-*"]
   }
 
   statement {
@@ -131,8 +139,8 @@ data "aws_iam_policy_document" "this" {
       test     = "StringLike"
       variable = "kms:ViaService"
       values = [
-        "sqs.${var.region}.amazonaws.com",
-        "s3.${var.region}.amazonaws.com"
+        "sqs.${local.region}.amazonaws.com",
+        "s3.${local.region}.amazonaws.com"
       ]
     }
   }

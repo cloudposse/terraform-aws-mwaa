@@ -1,11 +1,11 @@
-variable "region" {
-  type        = string
-  description = "AWS region"
-}
-
 variable "vpc_id" {
   type        = string
   description = "VPC ID for the MWAA environment. Required if `create_security_group` is `true`"
+}
+
+variable "subnet_ids" {
+  type        = list(string)
+  description = "The private subnet IDs in which the environment should be created. MWAA requires two subnets"
 }
 
 variable "create_security_group" {
@@ -24,6 +24,12 @@ variable "create_iam_role" {
   type        = bool
   description = "Enabling or disabling the creatation of a default IAM Role for AWS MWAA"
   default     = true
+}
+
+variable "execution_role_arn" {
+  type        = string
+  default     = ""
+  description = "If `create_iam_role` is `false` then set this to the target MWAA execution role"
 }
 
 variable "security_group_description" {
@@ -56,6 +62,12 @@ variable "allowed_security_group_ids" {
     EOT
 }
 
+variable "allowed_cidr_blocks" {
+  type        = list(string)
+  default     = []
+  description = "List of CIDR blocks to be allowed to connect to the MWAA Environment"
+}
+
 variable "additional_security_group_rules" {
   type        = list(any)
   default     = []
@@ -67,12 +79,6 @@ variable "additional_security_group_rules" {
     for `security_group_id` which will be ignored, and the optional "key" which, if provided, must be unique and known at "plan" time.
     To get more info see https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule .
     EOT
-}
-
-variable "execution_role_arn" {
-  type        = string
-  default     = ""
-  description = "If `create_iam_role` is `false` then set this to the target MWAA execution role"
 }
 
 variable "airflow_configuration_options" {
@@ -211,15 +217,4 @@ variable "worker_logs_level" {
   type        = string
   description = "Workers logging level. Valid values: CRITICAL, ERROR, WARNING, INFO, DEBUG"
   default     = "INFO"
-}
-
-variable "subnet_ids" {
-  type        = list(string)
-  description = "The private subnet IDs in which the environment should be created. MWAA requires two subnets"
-}
-
-variable "allowed_cidr_blocks" {
-  type        = list(string)
-  default     = []
-  description = "List of CIDR blocks to be allowed to connect to the MWAA Environment"
 }
