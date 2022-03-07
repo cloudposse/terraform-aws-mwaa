@@ -170,7 +170,7 @@ module "mwaa_security_group" {
 
 module "mwaa_s3_bucket" {
   source  = "cloudposse/s3-bucket/aws"
-  version = "0.44.1"
+  version = "0.49.0"
 
   enabled = local.s3_bucket_enabled
 
