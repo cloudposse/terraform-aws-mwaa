@@ -3,17 +3,6 @@ variable "region" {
   description = "AWS region"
 }
 
-variable "vpc_id" {
-  type        = string
-  description = "VPC ID for the MWAA environment. Required if `create_security_group` is `true`"
-}
-
-variable "create_security_group" {
-  type        = bool
-  description = "Enabling or disabling the creation of a default Security Group for AWS MWAA"
-  default     = true
-}
-
 variable "create_s3_bucket" {
   type        = bool
   description = "Enabling or disabling the creatation of an S3 bucket for AWS MWAA"
@@ -26,47 +15,10 @@ variable "create_iam_role" {
   default     = true
 }
 
-variable "security_group_description" {
-  type        = string
-  description = "The Security Group description."
-  default     = "Security Group for AWS MWAA"
-}
-
 variable "source_bucket_arn" {
   type        = string
   description = "If `create_s3_bucket` is `false` then set this to the Amazon Resource Name (ARN) of your Amazon S3 storage bucket."
   default     = null
-}
-
-variable "associated_security_group_ids" {
-  type        = list(string)
-  default     = []
-  description = <<-EOT
-    A list of IDs of Security Groups to associate the created resource with, in addition to the created security group.
-    These security groups will not be modified and, if `create_security_group` is `false`, must have rules providing the desired access.
-    EOT
-}
-
-variable "allowed_security_group_ids" {
-  type        = list(string)
-  default     = []
-  description = <<-EOT
-    A list of IDs of Security Groups to allow access to the security group created by this module.
-    The length of this list must be known at "plan" time.
-    EOT
-}
-
-variable "additional_security_group_rules" {
-  type        = list(any)
-  default     = []
-  description = <<-EOT
-    A list of Security Group rule objects to add to the created security group, in addition to the ones
-    this module normally creates. (To suppress the module's rules, set `create_security_group` to false
-    and supply your own security group via `associated_security_group_ids`.)
-    The keys and values of the objects are fully compatible with the `aws_security_group_rule` resource, except
-    for `security_group_id` which will be ignored, and the optional "key" which, if provided, must be unique and known at "plan" time.
-    To get more info see https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule .
-    EOT
 }
 
 variable "execution_role_arn" {
@@ -216,10 +168,4 @@ variable "worker_logs_level" {
 variable "subnet_ids" {
   type        = list(string)
   description = "The private subnet IDs in which the environment should be created. MWAA requires two subnets"
-}
-
-variable "allowed_cidr_blocks" {
-  type        = list(string)
-  default     = []
-  description = "List of CIDR blocks to be allowed to connect to the MWAA Environment"
 }
