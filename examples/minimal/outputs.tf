@@ -14,8 +14,8 @@ output "logging_configuration" {
 }
 
 output "security_group_ids" {
-  description = "IDs of the MWAA Security Group(s)"
-  value       = module.mwaa.security_group_ids
+  description = "ID of the MWAA Security Group(s)"
+  value       = module.mwaa.security_group_id
 }
 
 output "execution_role_arn" {
