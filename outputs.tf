@@ -1,8 +1,3 @@
-output "security_group_ids" {
-  description = "IDs of the MWAA Security Group(s)"
-  value       = local.security_group_ids
-}
-
 output "s3_bucket_arn" {
   description = "ARN of the S3 bucket"
   value       = local.s3_bucket_arn
@@ -46,4 +41,19 @@ output "tags_all" {
 output "webserver_url" {
   description = "The webserver URL of the Amazon MWAA Environment"
   value       = join("", aws_mwaa_environment.default.*.webserver_url)
+}
+
+output "security_group_id" {
+  value       = join("", module.mwaa_security_group.*.id)
+  description = "The ID of the created security group"
+}
+
+output "security_group_arn" {
+  value       = join("", module.mwaa_security_group.*.arn)
+  description = "The ARN of the created security group"
+}
+
+output "security_group_name" {
+  value       = join("", module.mwaa_security_group.*.name)
+  description = "The name of the created security group"
 }

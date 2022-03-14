@@ -140,26 +140,32 @@ data "aws_iam_policy_document" "this" {
 
 module "mwaa_security_group" {
   source  = "cloudposse/security-group/aws"
-  version = "0.4.2"
+  version = "0.4.3"
 
-  enabled                    = local.security_group_enabled
+  enabled                       = local.security_group_enabled
+  security_group_name           = var.security_group_name
+  create_before_destroy         = var.security_group_create_before_destroy
+  security_group_create_timeout = var.security_group_create_timeout
+  security_group_delete_timeout = var.security_group_delete_timeout
+
   security_group_description = var.security_group_description
-  allow_all_egress           = true
+  allow_all_egress           = var.allow_all_egress
   rules                      = var.additional_security_group_rules
   rule_matrix = [
     {
       source_security_group_ids = var.allowed_security_group_ids
       cidr_blocks               = var.allowed_cidr_blocks
+      self                      = true
       rules = [
         {
           key         = "mwaa"
           type        = "ingress"
-          from_port   = 443
-          to_port     = 443
-          protocol    = "TCP"
+          from_port   = 0
+          to_port     = 0
+          protocol    = -1
           self        = true
           description = "Allow ingress Amazon MWAA traffic"
-        }
+        },
       ]
     }
   ]
@@ -170,7 +176,7 @@ module "mwaa_security_group" {
 
 module "mwaa_s3_bucket" {
   source  = "cloudposse/s3-bucket/aws"
-  version = "0.44.1"
+  version = "0.49.0"
 
   enabled = local.s3_bucket_enabled
 
@@ -179,7 +185,7 @@ module "mwaa_s3_bucket" {
 
 module "mwaa_iam_role" {
   source  = "cloudposse/iam-role/aws"
-  version = "0.14.0"
+  version = "0.15.0"
 
   enabled = local.iam_role_enabled
   principals = {
