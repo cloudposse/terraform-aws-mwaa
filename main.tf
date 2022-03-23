@@ -125,7 +125,7 @@ data "aws_iam_policy_document" "this" {
       "kms:GenerateDataKey*",
       "kms:Encrypt"
     ]
-    effect    = "Allow"
+    effect        = "Allow"
     not_resources = ["arn:${local.partition}:kms:*:${local.account_id}:key/*"]
     condition {
       test     = "StringLike"
