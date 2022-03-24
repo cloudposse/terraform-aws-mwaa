@@ -29,8 +29,8 @@ variable "execution_role_arn" {
 
 variable "airflow_configuration_options" {
   description = "The Airflow override options"
-  type        = any
-  default     = null
+  type        = map(string)
+  default     = {}
 }
 
 variable "airflow_version" {

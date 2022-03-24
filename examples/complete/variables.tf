@@ -15,7 +15,7 @@ variable "webserver_access_mode" {
 
 variable "airflow_configuration_options" {
   description = "Airflow override options"
-  type        = any
+  type        = map(string)
 }
 
 variable "airflow_version" {
