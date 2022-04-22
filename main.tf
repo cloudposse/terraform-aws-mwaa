@@ -183,6 +183,15 @@ module "mwaa_s3_bucket" {
   context = module.s3_label.context
 }
 
+resource "aws_s3_object" "mwaa_requirements" {
+  count       = (var.requirements_file != null && var.create_s3_bucket && var.requirements_s3_path != null) ? 1 : 0
+  bucket      = module.mwaa_s3_bucket.bucket_id
+  key         = var.requirements_s3_path
+  source      = var.requirements_file
+  source_hash = filemd5(var.requirements_file)
+}
+
+
 module "mwaa_iam_role" {
   source  = "cloudposse/iam-role/aws"
   version = "0.16.1"
@@ -209,7 +218,8 @@ module "mwaa_iam_role" {
 }
 
 resource "aws_mwaa_environment" "default" {
-  count = local.enabled ? 1 : 0
+  depends_on = [aws_s3_object.mwaa_requirements]
+  count      = local.enabled ? 1 : 0
 
   name                            = module.this.id
   airflow_configuration_options   = var.airflow_configuration_options
@@ -221,7 +231,7 @@ resource "aws_mwaa_environment" "default" {
   min_workers                     = var.min_workers
   plugins_s3_object_version       = var.plugins_s3_object_version
   plugins_s3_path                 = var.plugins_s3_path
-  requirements_s3_object_version  = var.requirements_s3_object_version
+  requirements_s3_object_version  = coalesce(var.requirements_s3_object_version, aws_s3_object.mwaa_requirements[count.index].version_id)
   requirements_s3_path            = var.requirements_s3_path
   webserver_access_mode           = var.webserver_access_mode
   weekly_maintenance_window_start = var.weekly_maintenance_window_start
