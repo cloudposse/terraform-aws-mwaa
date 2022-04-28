@@ -12,6 +12,7 @@ locals {
   security_group_ids     = var.create_security_group ? concat(var.associated_security_group_ids, [module.mwaa_security_group.id]) : var.associated_security_group_ids
   s3_bucket_arn          = var.create_s3_bucket ? module.mwaa_s3_bucket.bucket_arn : var.source_bucket_arn
   execution_role_arn     = var.create_iam_role ? module.mwaa_iam_role.arn : var.execution_role_arn
+  tmp_plugins_file       = "/tmp/plugins.zip"
 }
 
 module "s3_label" {
@@ -192,6 +193,37 @@ resource "aws_s3_object" "mwaa_requirements" {
 }
 
 
+data "archive_file" "zip_plugins" {
+  count       = (var.plugins_dir != null && var.create_s3_bucket && var.plugins_s3_path != null) ? 1 : 0
+  type        = "zip"
+  source_dir  = var.plugins_dir
+  output_path = local.tmp_plugins_file
+}
+
+resource "aws_s3_object" "plugins" {
+  count  = (var.plugins_dir != null && var.create_s3_bucket && var.plugins_s3_path != null) ? 1 : 0
+  bucket = module.mwaa_s3_bucket.bucket_id
+  key    = trimsuffix(var.plugins_s3_path, reverse(split("/", var.plugins_s3_path))[0])
+  source = "/dev/null"
+}
+
+resource "aws_s3_object" "plugins_file" {
+  count  = (var.plugins_dir != null && var.create_s3_bucket && var.plugins_s3_path != null) ? 1 : 0
+  bucket = module.mwaa_s3_bucket.bucket_id
+  key    = var.plugins_s3_path
+  source = data.archive_file.zip_plugins[0].output_path
+
+}
+resource "null_resource" "delete_plugin" {
+  depends_on = [aws_s3_object.plugins_file]
+  triggers = {
+    build_number = timestamp()
+  }
+  provisioner "local-exec" {
+    command = "rm -f ${local.tmp_plugins_file}"
+  }
+}
+
 module "mwaa_iam_role" {
   source  = "cloudposse/iam-role/aws"
   version = "0.16.1"
@@ -229,7 +261,7 @@ resource "aws_mwaa_environment" "default" {
   kms_key                         = var.kms_key
   max_workers                     = var.max_workers
   min_workers                     = var.min_workers
-  plugins_s3_object_version       = var.plugins_s3_object_version
+  plugins_s3_object_version       = coalesce(var.plugins_s3_object_version, aws_s3_object.plugins_file[count.index].version_id)
   plugins_s3_path                 = var.plugins_s3_path
   requirements_s3_object_version  = coalesce(var.requirements_s3_object_version, aws_s3_object.mwaa_requirements[count.index].version_id)
   requirements_s3_path            = var.requirements_s3_path

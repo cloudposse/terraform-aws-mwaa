@@ -99,6 +99,12 @@ variable "requirements_file" {
   default     = null
 }
 
+variable "plugins_dir" {
+  type        = string
+  description = "The plugins dir to be zipped and to upload to your Amazon S3 storage bucket under `plugins/plugins.zip`"
+  default     = null
+}
+
 variable "webserver_access_mode" {
   type        = string
   description = "Specifies whether the webserver should be accessible over the internet or via your specified VPC. Possible options: PRIVATE_ONLY (default) and PUBLIC_ONLY."
