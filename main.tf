@@ -140,7 +140,7 @@ data "aws_iam_policy_document" "this" {
 
 module "mwaa_security_group" {
   source  = "cloudposse/security-group/aws"
-  version = "0.4.3"
+  version = "1.0.0"
 
   enabled                       = local.security_group_enabled
   security_group_name           = var.security_group_name
