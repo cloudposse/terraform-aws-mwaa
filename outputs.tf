@@ -44,16 +44,16 @@ output "webserver_url" {
 }
 
 output "security_group_id" {
-  value       = join("", module.mwaa_security_group.*.id)
+  value       = join("", compact(module.mwaa_security_group.*.id))
   description = "The ID of the created security group"
 }
 
 output "security_group_arn" {
-  value       = join("", module.mwaa_security_group.*.arn)
+  value       = join("", compact(module.mwaa_security_group.*.arn))
   description = "The ARN of the created security group"
 }
 
 output "security_group_name" {
-  value       = join("", module.mwaa_security_group.*.name)
+  value       = join("", compact(module.mwaa_security_group.*.name))
   description = "The name of the created security group"
 }
