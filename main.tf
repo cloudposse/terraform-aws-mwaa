@@ -198,7 +198,7 @@ module "mwaa_iam_role" {
   use_fullname = true
 
   policy_documents = concat(
-    [data.aws_iam_policy_document.this.json], 
+    [data.aws_iam_policy_document.this.json],
     var.custom_policies
   )
 
