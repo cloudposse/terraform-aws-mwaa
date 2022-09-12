@@ -197,9 +197,10 @@ module "mwaa_iam_role" {
 
   use_fullname = true
 
-  policy_documents = [
-    data.aws_iam_policy_document.this.json,
-  ]
+  policy_documents = concat(
+    [data.aws_iam_policy_document.this.json], 
+    var.custom_policies
+  )
 
   policy_document_count = 1
   policy_description    = "AWS MWAA IAM policy"

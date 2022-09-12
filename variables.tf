@@ -15,6 +15,12 @@ variable "create_iam_role" {
   default     = true
 }
 
+variable "custom_policies" {
+  type        = list(string)
+  description = "If `create_iam_role` is set to `true`, list of custom policies in json format can be provided and added to role"
+  default     = []
+}
+
 variable "source_bucket_arn" {
   type        = string
   description = "If `create_s3_bucket` is `false` then set this to the Amazon Resource Name (ARN) of your Amazon S3 storage bucket."
