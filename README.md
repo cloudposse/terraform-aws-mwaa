@@ -162,7 +162,7 @@ Available targets:
 |------|--------|---------|
 | <a name="module_iam_label"></a> [iam\_label](#module\_iam\_label) | cloudposse/label/null | 0.25.0 |
 | <a name="module_mwaa_iam_role"></a> [mwaa\_iam\_role](#module\_mwaa\_iam\_role) | cloudposse/iam-role/aws | 0.16.2 |
-| <a name="module_mwaa_s3_bucket"></a> [mwaa\_s3\_bucket](#module\_mwaa\_s3\_bucket) | cloudposse/s3-bucket/aws | 2.0.1 |
+| <a name="module_mwaa_s3_bucket"></a> [mwaa\_s3\_bucket](#module\_mwaa\_s3\_bucket) | cloudposse/s3-bucket/aws | 3.0.0 |
 | <a name="module_mwaa_security_group"></a> [mwaa\_security\_group](#module\_mwaa\_security\_group) | cloudposse/security-group/aws | 1.0.1 |
 | <a name="module_s3_label"></a> [s3\_label](#module\_s3\_label) | cloudposse/label/null | 0.25.0 |
 | <a name="module_sg_label"></a> [sg\_label](#module\_sg\_label) | cloudposse/label/null | 0.25.0 |
@@ -429,7 +429,7 @@ Check out [our other projects][github], [follow us on twitter][twitter], [apply 
 
 [![README Footer][readme_footer_img]][readme_footer_link]
 [![Beacon][beacon]][website]
-
+<!-- markdownlint-disable -->
   [logo]: https://cloudposse.com/logo-300x69.svg
   [docs]: https://cpco.io/docs?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-aws-mwaa&utm_content=docs
   [website]: https://cpco.io/homepage?utm_source=github&utm_medium=readme&utm_campaign=cloudposse/terraform-aws-mwaa&utm_content=website
@@ -460,3 +460,4 @@ Check out [our other projects][github], [follow us on twitter][twitter], [apply 
   [share_googleplus]: https://plus.google.com/share?url=https://github.com/cloudposse/terraform-aws-mwaa
   [share_email]: mailto:?subject=terraform-aws-mwaa&body=https://github.com/cloudposse/terraform-aws-mwaa
   [beacon]: https://ga-beacon.cloudposse.com/UA-76589703-4/cloudposse/terraform-aws-mwaa?pixel&cs=github&cm=readme&an=terraform-aws-mwaa
+<!-- markdownlint-restore -->
