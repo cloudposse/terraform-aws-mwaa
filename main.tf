@@ -227,6 +227,7 @@ resource "aws_mwaa_environment" "default" {
   startup_script_s3_path           = var.startup_script_s3_path
   webserver_access_mode            = var.webserver_access_mode
   weekly_maintenance_window_start  = var.weekly_maintenance_window_start
+  schedulers                       = var.schedulers
   source_bucket_arn                = local.s3_bucket_arn
   execution_role_arn               = local.execution_role_arn
 
