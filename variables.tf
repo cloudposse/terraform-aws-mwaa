@@ -181,3 +181,9 @@ variable "startup_script_s3_object_version" {
   description = "The version of the startup shell script you want to use. You must specify the version ID that Amazon S3 assigns to the file every time you update the script."
   default     = null
 }
+
+variable "schedulers" {
+  type        = string
+  description = "The number of schedulers that you want to run in your environment. v2.0.2 and above accepts 2 - 5, default 2. v1.10.12 accepts 1"
+  default     = null
+}
