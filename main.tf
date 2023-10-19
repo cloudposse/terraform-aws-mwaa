@@ -176,7 +176,7 @@ module "mwaa_security_group" {
 
 module "mwaa_s3_bucket" {
   source  = "cloudposse/s3-bucket/aws"
-  version = "2.0.1"
+  version = "4.0.0"
 
   enabled = local.s3_bucket_enabled
 
@@ -211,22 +211,24 @@ module "mwaa_iam_role" {
 resource "aws_mwaa_environment" "default" {
   count = local.enabled ? 1 : 0
 
-  name                            = module.this.id
-  airflow_configuration_options   = var.airflow_configuration_options
-  airflow_version                 = var.airflow_version
-  dag_s3_path                     = var.dag_s3_path
-  environment_class               = var.environment_class
-  kms_key                         = var.kms_key
-  max_workers                     = var.max_workers
-  min_workers                     = var.min_workers
-  plugins_s3_object_version       = var.plugins_s3_object_version
-  plugins_s3_path                 = var.plugins_s3_path
-  requirements_s3_object_version  = var.requirements_s3_object_version
-  requirements_s3_path            = var.requirements_s3_path
-  webserver_access_mode           = var.webserver_access_mode
-  weekly_maintenance_window_start = var.weekly_maintenance_window_start
-  source_bucket_arn               = local.s3_bucket_arn
-  execution_role_arn              = local.execution_role_arn
+  name                             = module.this.id
+  airflow_configuration_options    = var.airflow_configuration_options
+  airflow_version                  = var.airflow_version
+  dag_s3_path                      = var.dag_s3_path
+  environment_class                = var.environment_class
+  kms_key                          = var.kms_key
+  max_workers                      = var.max_workers
+  min_workers                      = var.min_workers
+  plugins_s3_object_version        = var.plugins_s3_object_version
+  plugins_s3_path                  = var.plugins_s3_path
+  requirements_s3_object_version   = var.requirements_s3_object_version
+  requirements_s3_path             = var.requirements_s3_path
+  startup_script_s3_object_version = var.startup_script_s3_object_version
+  startup_script_s3_path           = var.startup_script_s3_path
+  webserver_access_mode            = var.webserver_access_mode
+  weekly_maintenance_window_start  = var.weekly_maintenance_window_start
+  source_bucket_arn                = local.s3_bucket_arn
+  execution_role_arn               = local.execution_role_arn
 
   logging_configuration {
     dag_processing_logs {
