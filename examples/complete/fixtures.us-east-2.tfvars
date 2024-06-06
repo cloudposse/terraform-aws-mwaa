@@ -12,7 +12,7 @@ name = "mwaa-test"
 
 availability_zones = ["us-east-2a", "us-east-2b"]
 
-airflow_version = "2.2.2"
+airflow_version = "2.8.1"
 
 dag_s3_path = "dags"
 
