@@ -5,3 +5,4 @@ repository:
   description: Terraform module to provision Amazon Managed Workflows for Apache Airflow (MWAA)
   homepage: https://cloudposse.com/accelerate
   topics: ""
+
