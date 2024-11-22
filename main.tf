@@ -185,7 +185,7 @@ module "mwaa_s3_bucket" {
 
 module "mwaa_iam_role" {
   source  = "cloudposse/iam-role/aws"
-  version = "0.16.2"
+  version = "0.20.0"
 
   enabled = local.iam_role_enabled
   principals = {
