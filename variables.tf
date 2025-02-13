@@ -15,6 +15,18 @@ variable "create_iam_role" {
   default     = true
 }
 
+variable "additionals_managed_policy_arns" {
+  type        = list
+  description = "List of managed policies to attach to the MWAA IAM role"
+  default     = []
+}
+
+variable "additionals_policy_documents" {
+  type        = list
+  description = "List of JSON IAM policy documents to attach to the MWAA IAM role"
+  default     = []
+}
+
 variable "source_bucket_arn" {
   type        = string
   description = "If `create_s3_bucket` is `false` then set this to the Amazon Resource Name (ARN) of your Amazon S3 storage bucket."

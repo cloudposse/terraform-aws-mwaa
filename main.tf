@@ -12,6 +12,10 @@ locals {
   security_group_ids     = var.create_security_group ? concat(var.associated_security_group_ids, [module.mwaa_security_group.id]) : var.associated_security_group_ids
   s3_bucket_arn          = var.create_s3_bucket ? module.mwaa_s3_bucket.bucket_arn : var.source_bucket_arn
   execution_role_arn     = var.create_iam_role ? module.mwaa_iam_role.arn : var.execution_role_arn
+  iam_policy_documents = concat(
+    var.additionals_policy_documents,
+    [data.aws_iam_policy_document.this.json]
+  )
 }
 
 module "s3_label" {
@@ -197,13 +201,13 @@ module "mwaa_iam_role" {
 
   use_fullname = true
 
-  policy_documents = [
-    data.aws_iam_policy_document.this.json,
-  ]
+  policy_documents = local.iam_policy_documents
 
-  policy_document_count = 1
+  policy_document_count = length(local.iam_policy_documents)
   policy_description    = "AWS MWAA IAM policy"
   role_description      = "AWS MWAA IAM role"
+
+  managed_policy_arns = var.additionals_managed_policy_arns
 
   context = module.iam_label.context
 }
