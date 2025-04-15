@@ -17,7 +17,7 @@
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_iam_label"></a> [iam\_label](#module\_iam\_label) | cloudposse/label/null | 0.25.0 |
-| <a name="module_mwaa_iam_role"></a> [mwaa\_iam\_role](#module\_mwaa\_iam\_role) | cloudposse/iam-role/aws | 0.16.2 |
+| <a name="module_mwaa_iam_role"></a> [mwaa\_iam\_role](#module\_mwaa\_iam\_role) | cloudposse/iam-role/aws | 0.20.0 |
 | <a name="module_mwaa_s3_bucket"></a> [mwaa\_s3\_bucket](#module\_mwaa\_s3\_bucket) | cloudposse/s3-bucket/aws | 4.0.0 |
 | <a name="module_mwaa_security_group"></a> [mwaa\_security\_group](#module\_mwaa\_security\_group) | cloudposse/security-group/aws | 1.0.1 |
 | <a name="module_s3_label"></a> [s3\_label](#module\_s3\_label) | cloudposse/label/null | 0.25.0 |
@@ -39,6 +39,8 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_additional_security_group_rules"></a> [additional\_security\_group\_rules](#input\_additional\_security\_group\_rules) | A list of Security Group rule objects to add to the created security group, in addition to the ones<br/>this module normally creates. (To suppress the module's rules, set `create_security_group` to false<br/>and supply your own security group(s) via `associated_security_group_ids`.)<br/>The keys and values of the objects are fully compatible with the `aws_security_group_rule` resource, except<br/>for `security_group_id` which will be ignored, and the optional "key" which, if provided, must be unique and known at "plan" time.<br/>For more info see https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule<br/>and https://github.com/cloudposse/terraform-aws-security-group. | `list(any)` | `[]` | no |
 | <a name="input_additional_tag_map"></a> [additional\_tag\_map](#input\_additional\_tag\_map) | Additional key-value pairs to add to each map in `tags_as_list_of_maps`. Not added to `tags` or `id`.<br/>This is for some rare cases where resources want additional configuration of tags<br/>and therefore take a list of maps with tag key, value, and additional configuration. | `map(string)` | `{}` | no |
+| <a name="input_additionals_managed_policy_arns"></a> [additionals\_managed\_policy\_arns](#input\_additionals\_managed\_policy\_arns) | List of managed policies to attach to the MWAA IAM role | `list(any)` | `[]` | no |
+| <a name="input_additionals_policy_documents"></a> [additionals\_policy\_documents](#input\_additionals\_policy\_documents) | List of JSON IAM policy documents to attach to the MWAA IAM role | `list(any)` | `[]` | no |
 | <a name="input_airflow_configuration_options"></a> [airflow\_configuration\_options](#input\_airflow\_configuration\_options) | The Airflow override options | `any` | `null` | no |
 | <a name="input_airflow_version"></a> [airflow\_version](#input\_airflow\_version) | Airflow version of the MWAA environment, will be set by default to the latest version that MWAA supports. | `string` | `""` | no |
 | <a name="input_allow_all_egress"></a> [allow\_all\_egress](#input\_allow\_all\_egress) | If `true`, the created security group will allow egress on all ports and protocols to all IP addresses.<br/>If this is false and no egress rules are otherwise specified, then no egress will be allowed. | `bool` | `true` | no |
