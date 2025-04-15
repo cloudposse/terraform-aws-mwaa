@@ -16,13 +16,13 @@ variable "create_iam_role" {
 }
 
 variable "additionals_managed_policy_arns" {
-  type        = list
+  type        = list(any)
   description = "List of managed policies to attach to the MWAA IAM role"
   default     = []
 }
 
 variable "additionals_policy_documents" {
-  type        = list
+  type        = list(any)
   description = "List of JSON IAM policy documents to attach to the MWAA IAM role"
   default     = []
 }
