@@ -2,8 +2,11 @@
 
 <!-- markdownlint-disable -->
 <a href="https://cpco.io/homepage"><img src="https://github.com/cloudposse/terraform-aws-mwaa/blob/main/.github/banner.png?raw=true" alt="Project Banner"/></a><br/>
-    <p align="right">
-<a href="https://github.com/cloudposse/terraform-aws-mwaa/releases/latest"><img src="https://img.shields.io/github/release/cloudposse/terraform-aws-mwaa.svg?style=for-the-badge" alt="Latest Release"/></a><a href="https://github.com/cloudposse/terraform-aws-mwaa/commits"><img src="https://img.shields.io/github/last-commit/cloudposse/terraform-aws-mwaa.svg?style=for-the-badge" alt="Last Updated"/></a><a href="https://slack.cloudposse.com"><img src="https://slack.cloudposse.com/for-the-badge.svg" alt="Slack Community"/></a></p>
+
+
+<p align="right"><a href="https://github.com/cloudposse/terraform-aws-mwaa/releases/latest"><img src="https://img.shields.io/github/release/cloudposse/terraform-aws-mwaa.svg?style=for-the-badge" alt="Latest Release"/></a><a href="https://github.com/cloudposse/terraform-aws-mwaa/commits"><img src="https://img.shields.io/github/last-commit/cloudposse/terraform-aws-mwaa.svg?style=for-the-badge" alt="Last Updated"/></a><a href="https://slack.cloudposse.com"><img src="https://slack.cloudposse.com/for-the-badge.svg" alt="Slack Community"/></a>
+
+</p>
 <!-- markdownlint-restore -->
 
 <!--
@@ -88,6 +91,10 @@ module "mwaa" {
 
 Here is an example of using this module:
 - [`examples/complete`](https://github.com/cloudposse/terraform-aws-mwaa/) - complete example of using this module
+
+
+
+
 
 
 
