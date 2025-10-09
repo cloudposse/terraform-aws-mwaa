@@ -81,6 +81,24 @@ variable "min_workers" {
   default     = 1
 }
 
+variable "max_webservers" {
+  type        = number
+  description = "The maximum number of web servers that you want to run in your environment."
+  default     = 2
+}
+
+variable "min_webservers" {
+  type        = number
+  description = "The minimum number of web servers that you want to run in your environment."
+  default     = 2
+}
+
+variable "schedulers" {
+  type        = number
+  description = "The number of schedulers that you want to run in your environment."
+  default     = 2
+}
+
 variable "plugins_s3_object_version" {
   type        = string
   description = "The plugins.zip file version you want to use."
