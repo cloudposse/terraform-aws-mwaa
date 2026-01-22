@@ -99,6 +99,12 @@ variable "schedulers" {
   default     = 2
 }
 
+variable "worker_replacement_strategy" {
+  type        = string
+  description = "The worker replacement strategy for environment updates. Valid values: FORCED, GRACEFUL."
+  default     = "FORCED"
+}
+
 variable "plugins_s3_object_version" {
   type        = string
   description = "The plugins.zip file version you want to use."
