@@ -32,6 +32,7 @@ module "mwaa" {
   environment_class             = var.environment_class
   min_workers                   = var.min_workers
   max_workers                   = var.max_workers
+  worker_replacement_strategy   = var.worker_replacement_strategy
   webserver_access_mode         = var.webserver_access_mode
   dag_processing_logs_enabled   = var.dag_processing_logs_enabled
   dag_processing_logs_level     = var.dag_processing_logs_level
