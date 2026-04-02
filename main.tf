@@ -223,6 +223,7 @@ resource "aws_mwaa_environment" "default" {
   kms_key                          = var.kms_key
   max_workers                      = var.max_workers
   min_workers                      = var.min_workers
+  worker_replacement_strategy      = var.worker_replacement_strategy
   min_webservers                   = var.environment_class == "mw1.micro" ? 1 : var.min_webservers
   max_webservers                   = var.environment_class == "mw1.micro" ? 1 : var.max_webservers
   schedulers                       = var.schedulers

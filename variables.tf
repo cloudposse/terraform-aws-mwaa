@@ -81,6 +81,17 @@ variable "min_workers" {
   default     = 1
 }
 
+variable "worker_replacement_strategy" {
+  type        = string
+  description = "The worker replacement strategy to use when updating the environment. Valid values: `FORCED`, `GRACEFUL`. `FORCED` means Apache Airflow workers will be stopped and replaced without waiting for tasks to complete before an update. `GRACEFUL` means Apache Airflow workers will be able to complete running tasks for up to 12 hours during an update before being stopped and replaced."
+  default     = null
+
+  validation {
+    condition     = var.worker_replacement_strategy == null || contains(["FORCED", "GRACEFUL"], var.worker_replacement_strategy)
+    error_message = "Valid values are: `FORCED`, `GRACEFUL`, or `null`."
+  }
+}
+
 variable "max_webservers" {
   type        = number
   description = "The maximum number of web servers that you want to run in your environment."

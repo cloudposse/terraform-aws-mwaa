@@ -22,6 +22,8 @@ min_workers = 1
 
 max_workers = 10
 
+worker_replacement_strategy = "FORCED"
+
 webserver_access_mode = "PRIVATE_ONLY"
 
 dag_processing_logs_enabled = true
