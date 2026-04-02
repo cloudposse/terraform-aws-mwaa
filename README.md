@@ -200,6 +200,7 @@ Here is an example of using this module:
 | <a name="input_weekly_maintenance_window_start"></a> [weekly\_maintenance\_window\_start](#input\_weekly\_maintenance\_window\_start) | Specifies the start date for the weekly maintenance window. | `string` | `null` | no |
 | <a name="input_worker_logs_enabled"></a> [worker\_logs\_enabled](#input\_worker\_logs\_enabled) | Enabling or disabling the collection of logs for the workers | `bool` | `false` | no |
 | <a name="input_worker_logs_level"></a> [worker\_logs\_level](#input\_worker\_logs\_level) | Workers logging level. Valid values: CRITICAL, ERROR, WARNING, INFO, DEBUG | `string` | `"INFO"` | no |
+| <a name="input_worker_replacement_strategy"></a> [worker\_replacement\_strategy](#input\_worker\_replacement\_strategy) | The worker replacement strategy to use when updating the environment. Valid values: `FORCED`, `GRACEFUL`. `FORCED` means Apache Airflow workers will be stopped and replaced without waiting for tasks to complete before an update. `GRACEFUL` means Apache Airflow workers will be able to complete running tasks for up to 12 hours during an update before being stopped and replaced. | `string` | `null` | no |
 
 ## Outputs
 
@@ -391,7 +392,7 @@ All other trademarks referenced herein are the property of their respective owne
 
 ## Copyrights
 
-Copyright © 2022-2025 [Cloud Posse, LLC](https://cloudposse.com)
+Copyright © 2022-2026 [Cloud Posse, LLC](https://cloudposse.com)
 
 
 
