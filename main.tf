@@ -237,6 +237,7 @@ resource "aws_mwaa_environment" "default" {
   weekly_maintenance_window_start  = var.weekly_maintenance_window_start
   source_bucket_arn                = local.s3_bucket_arn
   execution_role_arn               = local.execution_role_arn
+  worker_replacement_strategy      = var.worker_replacement_strategy
 
   logging_configuration {
     dag_processing_logs {
